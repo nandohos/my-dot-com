@@ -3,8 +3,10 @@ import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
 ---
 
-<header class="bg-white shadow-md dark:bg-gray-800">
-	<nav class="container mx-auto px-4 py-2 flex items-center justify-between">
+<header class="sticky top-0 bg-white dark:bg-gray-800 shadow z-10">
+	<nav
+		class="max-w-4xl container mx-auto px-4 py-2 flex items-center justify-between"
+	>
 		<h2 class="text-lg font-bold mb-0">
 			<a href="/" class="text-gray-900 dark:text-white hover:text-gray-600"
 				>{SITE_TITLE}</a
@@ -31,7 +33,7 @@ import { SITE_TITLE } from "../consts";
 			<button id="theme-toggle" class="text-gray-600 dark:text-gray-300 p-1">
 				<svg
 					id="theme-toggle-dark-icon"
-					class="hidden w-6 h-6"
+					class="w-6 h-6"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg"
@@ -84,47 +86,64 @@ import { SITE_TITLE } from "../consts";
 </header>
 
 <script>
-	const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-	const themeToggleLightIcon = document.getElementById(
-		"theme-toggle-light-icon",
-	);
-
-	// Change the icons inside the button based on previous settings
-	if (
-		localStorage.getItem("color-theme") === "dark" ||
-		(!("color-theme" in localStorage) &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches)
-	) {
-		themeToggleLightIcon.classList.remove("hidden");
-	} else {
-		themeToggleDarkIcon.classList.remove("hidden");
+	function getThemePreference(): string {
+		if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+			return localStorage.getItem("theme") || "light";
+		}
+		return window.matchMedia("(prefers-color-scheme: dark)").matches
+			? "dark"
+			: "light";
 	}
 
-	const themeToggleBtn = document.getElementById("theme-toggle");
+	function setTheme(theme: string) {
+		if (theme === "dark") {
+			document.documentElement.classList.add("dark");
+		} else {
+			document.documentElement.classList.remove("dark");
+		}
+		localStorage.setItem("theme", theme);
+	}
 
-	themeToggleBtn.addEventListener("click", function () {
-		// Toggle icons
-		themeToggleDarkIcon.classList.toggle("hidden");
-		themeToggleLightIcon.classList.toggle("hidden");
+	function updateIcon(theme: string) {
+		const darkIcon = document.getElementById("theme-toggle-dark-icon");
+		const lightIcon = document.getElementById("theme-toggle-light-icon");
 
-		// If set via local storage previously
-		if (localStorage.getItem("color-theme")) {
-			if (localStorage.getItem("color-theme") === "light") {
-				document.documentElement.classList.add("dark");
-				localStorage.setItem("color-theme", "dark");
+		if (darkIcon && lightIcon) {
+			// Check if both elements exist
+			if (theme === "dark") {
+				darkIcon.classList.add("hidden");
+				lightIcon.classList.remove("hidden");
 			} else {
-				document.documentElement.classList.remove("dark");
-				localStorage.setItem("color-theme", "light");
+				darkIcon.classList.remove("hidden");
+				lightIcon.classList.add("hidden");
 			}
 		} else {
-			// If not set via local storage previously
-			if (document.documentElement.classList.contains("dark")) {
-				document.documentElement.classList.remove("dark");
-				localStorage.setItem("color-theme", "light");
-			} else {
-				document.documentElement.classList.add("dark");
-				localStorage.setItem("color-theme", "dark");
-			}
+			console.warn("One or both of the theme toggle icons are missing.");
 		}
-	});
+	}
+
+	// Set initial theme
+	const theme = getThemePreference();
+	setTheme(theme);
+	updateIcon(theme);
+
+	// Toggle theme on button click
+	const themeToggle = document.getElementById("theme-toggle");
+	if (themeToggle) {
+		themeToggle.addEventListener("click", () => {
+			const currentTheme = getThemePreference();
+			const newTheme = currentTheme === "dark" ? "light" : "dark";
+			setTheme(newTheme);
+			updateIcon(newTheme);
+		});
+	}
+
+	// Update theme when system preference changes
+	window
+		.matchMedia("(prefers-color-scheme: dark)")
+		.addEventListener("change", (e) => {
+			const newTheme = e.matches ? "dark" : "light";
+			setTheme(newTheme);
+			updateIcon(newTheme);
+		});
 </script>
