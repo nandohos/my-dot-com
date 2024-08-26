@@ -104,20 +104,16 @@
 }
 
 @layer base {
-  html,
+  html {
+    @apply h-full;
+  }
   body {
-    height: 100%;
+    @apply h-full overflow-hidden;
   }
 }
 
 @layer components {
-  body {
-    display: flex;
-    flex-direction: column;
-  }
-
   main {
-    flex-grow: 1;
-    overflow-y: auto;
+    @apply overflow-auto;
   }
 }

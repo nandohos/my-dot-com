@@ -1,9 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import ContentLayout from "../layouts/ContentLayout.astro";
 ---
 
-<Layout>
-	<h1>🧑‍🚀 Hello, Astronaut!</h1>
+<ContentLayout
+	title="🧑‍🚀 Hello, Astronaut!"
+	description="This is my personal website and blog"
+>
 	<p>
 		Welcome to the official <a href="https://astro.build/">Astro</a> blog starter
 		template. This template serves as a lightweight, minimally-styled starting point
@@ -42,5 +44,4 @@ import Layout from "../layouts/Layout.astro";
 			>astro-blog-template
 		</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 	</p>
-</Layout>
-
+</ContentLayout>
