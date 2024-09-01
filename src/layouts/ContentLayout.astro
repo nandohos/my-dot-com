@@ -13,12 +13,14 @@ const { title, description } = Astro.props;
   <div class="max-w-4xl mx-auto px-4 py-8">
     {
       title && (
-        <h1 class="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">
+        <h1 class="text-4xl font-bold mb-6 text-latte-text dark:text-macchiato-text">
           {title}
         </h1>
       )
     }
-    <div class="prose dark:prose-invert max-w-none">
+    <div
+      class="prose dark:prose-invert prose-latte dark:prose-macchiato max-w-none"
+    >
       <slot />
     </div>
   </div>

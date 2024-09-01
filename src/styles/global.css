@@ -3,15 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --accent: 35, 55, 255;
-    --accent-dark: 0, 13, 138;
-    --black: 15, 18, 25;
-    --gray: 96, 115, 159;
-    --gray-light: 229, 233, 240;
-    --gray-dark: 34, 41, 57;
-  }
-
   @font-face {
     font-family: "Atkinson";
     src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -27,8 +18,12 @@
     font-display: swap;
   }
 
+  html {
+    @apply h-full;
+  }
+
   body {
-    @apply font-['Atkinson',sans-serif] text-lg leading-relaxed bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply font-['Atkinson',sans-serif] text-base leading-relaxed bg-latte-base dark:bg-macchiato-base text-latte-text dark:text-macchiato-text h-full overflow-hidden;
   }
 
   h1,
@@ -37,43 +32,42 @@
   h4,
   h5,
   h6 {
-    @apply font-bold mb-4 text-black dark:text-white;
+    @apply font-bold text-latte-text dark:text-macchiato-text;
   }
 
   h1 {
-    @apply text-4xl;
+    @apply text-4xl mb-6 mt-12;
   }
   h2 {
-    @apply text-3xl;
+    @apply text-3xl mb-5 mt-10;
   }
   h3 {
-    @apply text-2xl;
+    @apply text-2xl mb-4 mt-8;
   }
   h4 {
-    @apply text-xl;
+    @apply text-xl mb-4 mt-6;
   }
   h5 {
-    @apply text-lg;
+    @apply text-lg mb-3 mt-6;
+  }
+  h6 {
+    @apply text-base mb-3 mt-6;
   }
 
   a {
-    @apply text-blue-600 dark:text-blue-400 hover:underline;
+    @apply text-latte-blue dark:text-macchiato-blue hover:underline;
   }
 
   p {
     @apply mb-4;
   }
 
-  .prose p {
-    @apply mb-8;
-  }
-
   code {
-    @apply px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded;
+    @apply px-1 py-0.5 bg-latte-surface0 dark:bg-macchiato-surface0 rounded;
   }
 
   pre {
-    @apply p-4 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-x-auto;
+    @apply p-4 bg-latte-mantle dark:bg-macchiato-mantle rounded-lg overflow-x-auto my-4;
   }
 
   pre > code {
@@ -81,15 +75,15 @@
   }
 
   blockquote {
-    @apply border-l-4 border-blue-600 dark:border-blue-400 pl-4 italic;
+    @apply border-l-4 border-latte-blue dark:border-macchiato-blue pl-4 italic my-4;
   }
 
   hr {
-    @apply border-t border-gray-300 dark:border-gray-700 my-8;
+    @apply border-t border-latte-surface0 dark:border-macchiato-surface0 my-8;
   }
 
   img {
-    @apply max-w-full h-auto rounded-lg;
+    @apply max-w-full h-auto rounded-lg my-4;
   }
 
   .sr-only {
@@ -97,23 +91,106 @@
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400;
-  }
-}
-
-@layer base {
-  html {
-    @apply h-full;
-  }
-  body {
-    @apply h-full overflow-hidden;
-  }
-}
-
 @layer components {
   main {
     @apply overflow-auto;
   }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply font-bold text-latte-text dark:text-macchiato-text;
+  }
+
+  .prose h1 {
+    @apply text-4xl mb-6 mt-12;
+  }
+  .prose h2 {
+    @apply text-3xl mb-5 mt-10;
+  }
+  .prose h3 {
+    @apply text-2xl mb-4 mt-8;
+  }
+  .prose h4 {
+    @apply text-xl mb-4 mt-6;
+  }
+  .prose h5 {
+    @apply text-lg mb-3 mt-6;
+  }
+  .prose h6 {
+    @apply text-base mb-3 mt-6;
+  }
+
+  .prose p {
+    @apply mb-4;
+  }
+
+  .prose {
+    @apply text-latte-text dark:text-macchiato-text;
+  }
+
+  .prose a {
+    @apply text-latte-blue dark:text-macchiato-blue hover:underline;
+  }
+
+  .prose strong {
+    @apply text-latte-text dark:text-macchiato-text;
+  }
+
+  .prose code {
+    @apply px-1 py-0.5 bg-latte-surface0 dark:bg-macchiato-surface0 rounded;
+  }
+
+  .prose pre {
+    @apply p-4 bg-latte-mantle dark:bg-macchiato-mantle rounded-lg overflow-x-auto my-4;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-latte-blue dark:border-macchiato-blue pl-4 italic my-4;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-latte-blue to-latte-lavender dark:from-macchiato-blue dark:to-macchiato-lavender;
+  }
+}
+
+.prose-latte {
+  --tw-prose-body: theme("colors.latte.text");
+  --tw-prose-headings: theme("colors.latte.text");
+  --tw-prose-links: theme("colors.latte.blue");
+  --tw-prose-bold: theme("colors.latte.text");
+  --tw-prose-counters: theme("colors.latte.text");
+  --tw-prose-bullets: theme("colors.latte.text");
+  --tw-prose-hr: theme("colors.latte.surface0");
+  --tw-prose-quotes: theme("colors.latte.text");
+  --tw-prose-quote-borders: theme("colors.latte.surface0");
+  --tw-prose-captions: theme("colors.latte.subtext0");
+  --tw-prose-code: theme("colors.latte.text");
+  --tw-prose-pre-code: theme("colors.latte.text");
+  --tw-prose-pre-bg: theme("colors.latte.mantle");
+  --tw-prose-th-borders: theme("colors.latte.surface0");
+  --tw-prose-td-borders: theme("colors.latte.surface0");
+}
+
+.prose-macchiato {
+  --tw-prose-body: theme("colors.macchiato.text");
+  --tw-prose-headings: theme("colors.macchiato.text");
+  --tw-prose-links: theme("colors.macchiato.blue");
+  --tw-prose-bold: theme("colors.macchiato.text");
+  --tw-prose-counters: theme("colors.macchiato.text");
+  --tw-prose-bullets: theme("colors.macchiato.text");
+  --tw-prose-hr: theme("colors.macchiato.surface0");
+  --tw-prose-quotes: theme("colors.macchiato.text");
+  --tw-prose-quote-borders: theme("colors.macchiato.surface0");
+  --tw-prose-captions: theme("colors.macchiato.subtext0");
+  --tw-prose-code: theme("colors.macchiato.text");
+  --tw-prose-pre-code: theme("colors.macchiato.text");
+  --tw-prose-pre-bg: theme("colors.macchiato.mantle");
+  --tw-prose-th-borders: theme("colors.macchiato.surface0");
+  --tw-prose-td-borders: theme("colors.macchiato.surface0");
 }

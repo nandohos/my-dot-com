@@ -22,7 +22,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			)
 		}
 		<div class="text-center mb-8">
-			<div class="text-gray-600 dark:text-gray-400 mb-2">
+			<div class="text-latte-subtext0 dark:text-macchiato-subtext0 mb-2">
 				<FormattedDate date={pubDate} />
 				{
 					updatedDate && (
@@ -32,10 +32,16 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					)
 				}
 			</div>
-			<h1 class="text-4xl font-bold mb-4">{title}</h1>
-			<hr class="border-gray-300 dark:border-gray-700" />
+			<h1
+				class="text-4xl font-bold mb-4 text-latte-text dark:text-macchiato-text"
+			>
+				{title}
+			</h1>
+			<hr class="border-latte-surface0 dark:border-macchiato-surface0" />
 		</div>
-		<div class="prose dark:prose-invert mx-auto">
+		<div
+			class="prose dark:prose-invert prose-latte dark:prose-macchiato mx-auto"
+		>
 			<slot />
 		</div>
 	</article>
