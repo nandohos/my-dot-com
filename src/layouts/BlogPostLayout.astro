@@ -9,40 +9,40 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-	<article class="max-w-4xl mx-auto px-4 py-8">
-		{
-			heroImage && (
-				<img
-					class="w-full mb-8 rounded-xl shadow-lg"
-					width={1020}
-					height={510}
-					src={heroImage}
-					alt=""
-				/>
-			)
-		}
-		<div class="text-center mb-8">
-			<div class="text-latte-subtext0 dark:text-macchiato-subtext0 mb-2">
-				<FormattedDate date={pubDate} />
-				{
-					updatedDate && (
-						<div class="italic mt-1">
-							Last updated on <FormattedDate date={updatedDate} />
-						</div>
-					)
-				}
-			</div>
-			<h1
-				class="text-4xl font-bold mb-4 text-latte-text dark:text-macchiato-text"
-			>
-				{title}
-			</h1>
-			<hr class="border-latte-surface0 dark:border-macchiato-surface0" />
-		</div>
-		<div
-			class="prose dark:prose-invert prose-latte dark:prose-macchiato mx-auto"
-		>
-			<slot />
-		</div>
-	</article>
+  <article class="max-w-4xl mx-auto px-4 py-8">
+    {
+      heroImage && (
+        <img
+          class="w-full mb-8 rounded-xl shadow-lg"
+          width={1020}
+          height={510}
+          src={heroImage}
+          alt=""
+        />
+      )
+    }
+    <div class="text-center mb-8">
+      <div class="text-latte-subtext0 dark:text-macchiato-subtext0 mb-2">
+        <FormattedDate date={pubDate} />
+        {
+          updatedDate && (
+            <div class="italic mt-1">
+              Last updated on <FormattedDate date={updatedDate} />
+            </div>
+          )
+        }
+      </div>
+      <h1
+        class="text-4xl font-bold mb-4 text-latte-text dark:text-macchiato-text"
+      >
+        {title}
+      </h1>
+      <hr class="border-latte-surface0 dark:border-macchiato-surface0" />
+    </div>
+    <div
+      class="prose dark:prose-invert prose-latte dark:prose-macchiato mx-auto"
+    >
+      <slot />
+    </div>
+  </article>
 </Layout>

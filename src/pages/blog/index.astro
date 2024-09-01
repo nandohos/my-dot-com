@@ -24,11 +24,13 @@ const posts = (await getCollection("blog")).sort(
                   class="w-full mb-2 rounded-lg transition-shadow duration-200 group-hover:shadow-lg"
                 />
                 <h4
-                  class={`m-0 text-xl font-bold ${index === 0 ? "md:text-4xl" : ""} text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200`}
+                  class={`m-0 text-xl font-bold ${
+                    index === 0 ? "md:text-4xl" : ""
+                  } text-latte-text dark:text-macchiato-text group-hover:text-latte-blue dark:group-hover:text-macchiato-blue transition-colors duration-200`}
                 >
                   {post.data.title}
                 </h4>
-                <p class="m-0 text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                <p class="m-0 text-latte-subtext0 dark:text-macchiato-subtext0 group-hover:text-latte-blue dark:group-hover:text-macchiato-blue transition-colors duration-200">
                   <FormattedDate date={post.data.pubDate} />
                 </p>
               </a>
